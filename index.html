@@ -1,0 +1,11 @@
+<head xmlns="http://www.w3.org/1999/html">
+  <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+<html>
+    <body>
+    <h2>Most recent 100 scans</h2>
+    {% for scan in scans %}
+        <b>{{ scan.time }}:</b> {{ scan.device_mac }} : {{ scan.infrastructure_mac }} : {{ scan.ss }} </br>
+    {% endfor %}
+  </body>
+</html>
