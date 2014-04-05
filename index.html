@@ -1,12 +1,28 @@
-<head xmlns="http://www.w3.org/1999/html">
-  <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
-</head>
 <html>
-  <!-- This is just a comment -->
-    <body>
+<head xmlns="http://www.w3.org/1999/html">
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+<body>
+    <h2>Categories</h2>
+    <table style="width:300px">
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="heatmap.html">Heatmap</a></td>
+            <td><a href="stats.html">Statistics</a></td>
+        </tr>
+    </table>
+    <h2>Generate sample database</h2>
+    <form action="/generate">
+        Data size: <input type="number" name="data_size" value="100">
+        <input type="submit" value="Generate">
+    </form>
+    <h2>Clear database</h2>
+    <form action="/clear">
+        <input type="submit" value="Clear">
+    </form>
     <h2>Most recent 100 scans</h2>
     {% for scan in scans %}
-        <b>{{ scan.time }}:</b> {{ scan.device_mac }} : {{ scan.infrastructure_mac }} : {{ scan.ss }} </br>
+    <b>{{ scan.time }}:</b> {{ scan.device_mac }} : {{ scan.infrastructure_mac }} : {{ scan.ss }} </br>
     {% endfor %}
-  </body>
+</body>
 </html>

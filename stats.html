@@ -1,0 +1,31 @@
+<html>
+<head xmlns="http://www.w3.org/1999/html">
+    <link type="text/css" rel="stylesheet" href="stylesheets/main.css" />
+    <link type="text/css" rel="stylesheet" href="js/jquery-ui-1.10.4/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="js/flot/jquery.min.js"></script>
+    <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
+    <script type="text/javascript" src="js/stats.js"></script>
+</head>
+<body>
+    <h2>Categories</h2>
+    <table style="width:300px">
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="heatmap.html">Heatmap</a></td>
+            <td><a href="stats.html">Statistics</a></td>
+        </tr>
+    </table>
+    <h2>Number of visitors per day/week</h2>
+
+    <p>Select a day:</p>
+    <form action="">
+        <select name="days">
+            {% for day in days %}
+            <option value="{{ day.representation }}">{{ day.text }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <div id="placeholder" style="width:800px;height:450px;background:#ffffff"></div>
+</body>
+</html>

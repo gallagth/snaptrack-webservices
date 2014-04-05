@@ -8,6 +8,30 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 
+- url: /images
+  static_dir: images
+
+- url: /(.*\.(html))$
+  static_files: static/\1
+  upload: static/.*\.(html)$
+
+- url: /js
+  static_dir: js
+
+- url: /clear
+  script: sample-data.app
+
+- url: /generate
+  script: sample-data.app
+
+- url: /scans/.*
+  script: scans.app
+
+- url: /locations/.*
+  script: locations.app
+
+- url: /stats
+  script: stats.app
+
 - url: /.*
   script: snap-track.app
-
