@@ -12,12 +12,20 @@
     <table style="width:300px">
         <tr>
             <td><a href="/">Home</a></td>
-            <td><a href="heatmap.html">Heatmap</a></td>
-            <td><a href="stats.html">Statistics</a></td>
+            <td><a href="heatmap">Heatmap</a></td>
+            <td><a href="stats">Statistics</a></td>
         </tr>
     </table>
+    <p>Select a day:</p>
+    <form action="">
+        <select id="heatmap_day" name="heatmap_day" onchange="updateHeatmap()">
+        {% for day in days %}
+        <option value="{{ day|date:"d_m_Y"}}">{{ day|date:"d M Y" }}</option>
+        {% endfor %}
+        </select>
+    </form>
     <p>Move slider to change the time of the day</p>
-    <div id="slider" style="width:610px;"></div>
+    <div id="time_slider" style="width:610px;"></div>
 </br>
 </br>
 <div id="heatmapArea" class="well" style="width:973px;padding:0;height:368px;cursor:pointer;position:relative;">

@@ -1,16 +1,9 @@
 import datetime
 import time
-import urllib
-import wsgiref.handlers
-import os
 import random
-import json
 
 from google.appengine.ext import db
-from google.appengine.api import users
-from google.appengine.ext.webapp import template
 import webapp2
-
 import utils
 
 
@@ -58,8 +51,38 @@ class ListScans(webapp2.RequestHandler):
         self.response.out.write(utils.json_pretty_print(json_query_data))
 
 
+class RangeScans(webapp2.RequestHandler):
+    def get(self):
+        start_time = self.request.get('start_time')  # unix time in seconds
+        end_time = self.request.get('end_time')
+        if start_time and end_time:
+            try:
+                start_date = datetime.datetime.fromtimestamp(float(start_time))
+                end_date = datetime.datetime.fromtimestamp(float(end_time))
+            except ValueError:
+                start_date = None
+                end_date = None
+            if start_date and end_date:
+                scans = get_scans_for_date_range(start_date, end_date)
+                obj_array = utils.query_to_array(scans)
+                self.response.headers['Content-Type'] = 'application/json'
+                self.response.out.write(utils.json_pretty_print(obj_array))
+
+
+#day must be a python datetime
+def get_scans_for_day(day, limit=None):
+    min = datetime.datetime(day.year, day.month, day.day, 0, 0)
+    max = min + datetime.timedelta(days=1)
+    return Scan.gql("WHERE time >= :1 AND time < :2 ORDER BY time", min, max).fetch(limit)
+
+
+def get_scans_for_date_range(start_date, end_date, limit=None):
+    return Scan.gql("WHERE time >= :1 AND time <= :2 ORDER BY time", start_date, end_date).fetch(limit)
+
+
 app = webapp2.WSGIApplication([('/scans/add', ScanAdder),
-                               ('/scans/all', ListScans)], debug=True)
+                               ('/scans/all', ListScans),
+                               ('/scans/range', RangeScans)], debug=True)
 
 
 def main():

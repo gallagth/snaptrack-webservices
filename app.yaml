@@ -12,7 +12,7 @@ handlers:
   static_dir: images
 
 - url: /(.*\.(html))$
-  static_files: static/\1
+  static_files: html/\1
   upload: static/.*\.(html)$
 
 - url: /js
@@ -32,6 +32,9 @@ handlers:
 
 - url: /stats
   script: stats.app
+
+- url: /heatmap
+  script: heatmap.app
 
 - url: /.*
   script: snap-track.app

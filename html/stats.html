@@ -1,0 +1,50 @@
+<html>
+<head xmlns="http://www.w3.org/1999/html">
+    <link type="text/css" rel="stylesheet" href="stylesheets/main.css" />
+    <link type="text/css" rel="stylesheet" href="js/jquery-ui-1.10.4/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="js/flot/jquery.min.js"></script>
+    <script type="text/javascript" src="js/flot/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="js/flot/jquery.flot.time.min.js"></script>
+    <script type="text/javascript" src="js/stats.js"></script>
+</head>
+<body>
+    <h2>Categories</h2>
+    <table style="width:300px">
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="heatmap">Heatmap</a></td>
+            <td><a href="stats">Statistics</a></td>
+        </tr>
+    </table>
+    <h2>Number of visitors per day/week</h2>
+
+    <table>
+        <tr>
+            <td>
+                <p>Start day:</p>
+                <form action="/stats/day">
+                    <select id="start_day_dropdown" name="start_day" onchange="updateDayPlot()">
+                        {% for day in days %}
+                        <option value="{{ day|date:"d_m_Y"}}">{{ day|date:"d M Y" }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </td>
+            <td>
+                <p>End day:</p>
+                <form action="/stats/day">
+                    <select id="end_day_dropdown" name="end_day" onchange="updateDayPlot()">
+                        {% for day in days %}
+                        <option value="{{ day|date:"d_m_Y"}}">{{ day|date:"d M Y" }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <div id="placeholder" style="width:800px;height:450px;background:#ffffff"></div>
+</body>
+</html>
