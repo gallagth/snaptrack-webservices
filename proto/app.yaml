@@ -1,0 +1,27 @@
+application: snap-rest
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /maps/.*
+  script: maps.app
+
+- url: /scans/.*
+  script: scans.app
+
+- url: /locations/.*
+  script: locations.app
+
+- url: /base_stations/.*
+  script: base_stations.app
+
+- url: /clients/.*
+  script: clients.app
+
+- url: /generate.*
+  script: simulator.app
+
+- url: /clear.*
+  script: simulator.app
